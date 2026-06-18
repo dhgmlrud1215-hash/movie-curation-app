@@ -1,10 +1,32 @@
 import { useEffect, useState } from "react";
 import MovieCard from "../components/MovieCard";
-import { getNowPlayingMovies, getUpcomingMovies } from "../api/movieApi";
+import { 
+  getNowPlayingMovies, getUpcomingMovies, getTopRatedMovies 
+  } from "../api/movieApi";
 
 function Home() {
   const [movies, setMovies] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
+  const [topMovies, setTopMovies] = useState([]);
+
+  const [likedMovies, setLikedMovies] = useState([]);
+
+  const handleLikeMovie = (movie) => {
+  const isLiked = likedMovies.some((item) => item.id === movie.id);
+
+  let updatedMovies;
+
+  if (isLiked) {
+    updatedMovies = likedMovies.filter((item) => item.id !== movie.id);
+  } else {
+    updatedMovies = [...likedMovies, movie];
+  }
+
+  setLikedMovies(updatedMovies);
+  localStorage.setItem("likedMovies", JSON.stringify(updatedMovies));
+};
+
+
 
   useEffect(() => {
     getNowPlayingMovies().then((data) => {
@@ -14,6 +36,14 @@ function Home() {
     getUpcomingMovies().then((data) => {
       setUpcomingMovies(data);
     });
+
+    getTopRatedMovies().then((data) => {
+      setTopMovies(data);
+
+    },[])
+
+    const saved = JSON.parse(localStorage.getItem("likedMovies")) || [];
+          setLikedMovies(saved);
   }, []);
 
 
@@ -34,11 +64,18 @@ function Home() {
         </section>
       )}
 
-      <h2>현재 상영작</h2>
+      <h2 className="section-title">
+        <span>현재 </span>상영작
+      </h2>
 
       <section className="movie-list">
         {movies.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} type="now" />
+            <MovieCard k
+            key={movie.id}
+            movie={movie}
+            likedMovies={likedMovies}
+            onLike={handleLikeMovie}
+            type="now" />
         ))}
       </section>
 
@@ -50,8 +87,43 @@ function Home() {
         {upcomingMovies
           .filter((movie) => !movies.some((nowMovie) => nowMovie.id === movie.id))  
           .map((movie) => (
-            <MovieCard key={movie.id} movie={movie} type="upcoming" />
+            <MovieCard 
+            key={movie.id}
+            movie={movie}
+            likedMovies={likedMovies}
+            onLike={handleLikeMovie}
+            type="upcoming" />
           ))}
+      </section>
+
+      <h2 className="section-title">
+        <span>평점</span>높은 영화
+      </h2>
+
+      <section className="movie-list">
+        {topMovies.map((movie) => (
+          <MovieCard 
+          key={movie.id}
+          movie={movie}
+          likedMovies={likedMovies}
+          onLike={handleLikeMovie}
+          type="top" />
+        ))}
+      </section>
+
+      <h2 className="section-title">
+        내가<span>찜</span>한 영화
+      </h2>
+
+      <section className="movie-list">
+        {likedMovies.map((movie) => (
+          <MovieCard 
+          key={movie.id}
+          movie={movie}
+          likedMovies={likedMovies}
+          onLike={handleLikeMovie}
+          type="like" />
+        ))}
       </section>
     </main>
   );

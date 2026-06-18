@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { getMovieCertification, getMovieDetail } from "../api/movieApi";
 
-function MovieCard({ movie, type }) {
+function MovieCard({ movie, type, likedMovies, onLike }) {
+  
   const [certification, setCertification] = useState("");
-  const [liked, setLiked] = useState(false);
+
+  const liked = likedMovies?.some((item) => item.id === movie.id);
+
   const [runtime, setRuntime] = useState("");
+
 
   const getDday = (date) => {
   const today = new Date();
@@ -47,7 +51,7 @@ function MovieCard({ movie, type }) {
 
       <div className="movie-info">
         {type === "upcoming" ? (
-          <span>{getDday(movie.release_date)}</span>
+          <span className="comingday">{getDday(movie.release_date)}</span>
         ) : (
         <>  
           {movie.vote_average > 0 && (
@@ -61,7 +65,7 @@ function MovieCard({ movie, type }) {
       <div className="movie-actions">
         <button className="ticket-btn">상세보기</button>
 
-        <button className="like-btn" onClick={() => setLiked(!liked)}>
+        <button className="like-btn" onClick={() => onLike(movie)}>
             <img
                 src={liked ? "/icon/favorite_fill.svg" : "/icon/favorite.svg"}
                 alt="찜하기"
