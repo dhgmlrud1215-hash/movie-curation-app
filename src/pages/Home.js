@@ -64,9 +64,10 @@ function Home() {
         </section>
       )}
 
-      <h2 className="section-title">
-        <span>현재 </span>상영작
-      </h2>
+      <div className="section-title">
+        <h2><span>현재 </span>상영작</h2>
+        <small>more &gt;&gt;</small>
+      </div>
 
       <section className="movie-list">
         {movies.map((movie) => (
@@ -79,9 +80,10 @@ function Home() {
         ))}
       </section>
 
-      <h2 className="section-title">
-        상영 <span>예정</span>작
-      </h2>
+      <div className="section-title">
+        <h2>상영 <span>예정</span>작</h2>
+        <small>more &gt;&gt;</small>
+      </div>
 
       <section className="movie-list">
         {upcomingMovies
@@ -96,9 +98,10 @@ function Home() {
           ))}
       </section>
 
-      <h2 className="section-title">
-        <span>평점</span>높은 영화
-      </h2>
+      <div className="section-title">
+        <h2><span>평점 </span>높은 영화</h2>
+        <small>more &gt;&gt;</small>
+      </div>
 
       <section className="movie-list">
         {topMovies.map((movie) => (
