@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getMovieCertification, getMovieDetail } from "../api/movieApi";
 
 function MovieCard({ movie, type, likedMovies, onLike }) {
-  
+
   const [certification, setCertification] = useState("");
 
   const liked = likedMovies?.some((item) => item.id === movie.id);
@@ -42,7 +42,16 @@ function MovieCard({ movie, type, likedMovies, onLike }) {
       <img
         src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
         alt={movie.title}
+        className="movie-poster"
       />
+
+      <button className="like-btn" onClick={() => onLike(movie)}>
+        <img
+          src={liked ? "/icon/favorite_fill.svg" : "/icon/favorite.svg"}
+          alt="찜하기"
+          className="heart-icon"
+        />
+      </button>
 
       <h3>
         <span className="movie-title">{movie.title}</span>
@@ -60,19 +69,6 @@ function MovieCard({ movie, type, likedMovies, onLike }) {
           {runtime > 0 && <span className="movie-time">{runtime}분</span>}
         </>
         )}
-      </div>
-
-      <div className="movie-actions">
-        <button className="ticket-btn">상세보기</button>
-
-        <button className="like-btn" onClick={() => onLike(movie)}>
-            <img
-                src={liked ? "/icon/favorite_fill.svg" : "/icon/favorite.svg"}
-                alt="찜하기"
-                className="heart-icon"
-            />
-            찜하기
-        </button>
       </div>
     </div>
   );

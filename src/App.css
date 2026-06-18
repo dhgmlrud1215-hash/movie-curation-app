@@ -121,7 +121,7 @@ div.section-title {
 
 .movie-list {
   display: flex;
-  gap: 10px;
+  gap: 20px;
   overflow-x: auto;
   overflow-y: hidden;
   padding: 20px 10px 28px;
@@ -141,9 +141,18 @@ div.section-title {
 }
 
 .movie-card {
-  min-width: 200px;
-  flex: 0 0 180px;
+  width: 200px;
+  flex: 0 0 210px;
+  position: relative;
 }
+
+.movie-poster {
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+  display: block;
+}
+
 
 .movie-card img {
   width: 100%;
@@ -155,7 +164,8 @@ div.section-title {
   display: flex;
   align-items: center;
   gap: 6px;
-  height: 10px;
+  height: 42px;
+  margin: 10px 0 4px;
   font-size: 15px;
   white-space: nowrap;
 }
@@ -205,44 +215,28 @@ div.section-title {
   background: url(../public/icon/icon_clock_black.svg) 0 0 no-repeat;
 }
 
-.movie-actions {
-  display: flex;
-  gap: 8px;
-  margin-top: 12px;
-}
-
-.ticket-btn,
 .like-btn {
-  flex: 1;
-  height: 38px;
-  padding: 0 12px;
-  border: 1px solid #ddd;
-  background: #fff;
-  white-space: nowrap;
-  cursor: pointer;
-}
+   position: absolute;
+  top: 10px;
+  right: 10px;
 
-.ticket-btn:hover,
-.like-btn:hover {
-  background: #f5f5f5;
-}
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
 
-.like-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  cursor: pointer;
 }
 
 .heart-icon {
-  width: 14px !important;
-  height: 14px !important;
-
+  width: 18px !important;
+  height: 18px !important;
   object-fit: contain;
 }
 
 
-.like-btn.active .heart-icon {
-  filter: brightness(0) saturate(100%) invert(17%) sepia(93%) saturate(7460%) hue-rotate(358deg) brightness(103%) contrast(112%);
-  opacity: 1;
-}
