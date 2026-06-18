@@ -1,9 +1,17 @@
 function Header() {
 
     return (
-        <div>
-            <h1>MOVIE APP</h1>
-        </div>
+        <header className="header">
+            <h1 className="logo">MOVIHEE BOX</h1>
+
+            <nav className="header-menu">
+                <a href="#">
+                    <img src="/icon/search.svg" alt="검색"/>
+                </a>
+                <a href="#">로그인</a>
+                <a href="#">마이페이지</a>
+            </nav>
+        </header>
     );
 }
 
