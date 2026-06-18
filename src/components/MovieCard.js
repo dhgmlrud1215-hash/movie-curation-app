@@ -1,10 +1,26 @@
 import { useEffect, useState } from "react";
 import { getMovieCertification, getMovieDetail } from "../api/movieApi";
 
-function MovieCard({ movie }) {
+function MovieCard({ movie, type }) {
   const [certification, setCertification] = useState("");
   const [liked, setLiked] = useState(false);
   const [runtime, setRuntime] = useState("");
+
+  const getDday = (date) => {
+  const today = new Date();
+  const releaseDate = new Date(date);
+
+  today.setHours(0, 0, 0, 0);
+  releaseDate.setHours(0, 0, 0, 0);
+
+  const diff = releaseDate - today;
+  const dday = Math.ceil(diff / (1000 * 60 * 60 * 24));
+
+  if (dday > 0) return `D-${dday}`;
+  if (dday === 0) return "D-DAY";
+  return "상영중";
+  };
+
 
   useEffect(() => {
   getMovieCertification(movie.id).then((data) => {
@@ -14,7 +30,8 @@ function MovieCard({ movie }) {
   getMovieDetail(movie.id).then((data) => {
     setRuntime(data.runtime);
   });
-}, [movie.id]);
+  }, [movie.id]);
+
 
   return (
     <div className="movie-card">
@@ -24,13 +41,21 @@ function MovieCard({ movie }) {
       />
 
       <h3>
-        {movie.title}
-        {certification && <span>{certification}</span>}
+        <span className="movie-title">{movie.title}</span>
+        {certification && <span className="movie-age">{certification}</span>}
       </h3>
 
       <div className="movie-info">
-        <span>⭐ {movie.vote_average.toFixed(1)}</span>
-        {runtime && <span>{runtime}분</span>}
+        {type === "upcoming" ? (
+          <span>{getDday(movie.release_date)}</span>
+        ) : (
+        <>  
+          {movie.vote_average > 0 && (
+            <span>⭐ {movie.vote_average.toFixed(1)}</span>
+          )}
+          {runtime > 0 && <span className="movie-time">{runtime}분</span>}
+        </>
+        )}
       </div>
 
       <div className="movie-actions">

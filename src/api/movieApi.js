@@ -29,3 +29,12 @@ export async function getMovieDetail(movieId) {
   const data = await res.json();
   return data;
 }
+
+export async function getUpcomingMovies() {
+  const res = await fetch(
+    `${BASE_URL}/movie/upcoming?api_key=${API_KEY}&language=ko-KR&region=KR&page=1`
+  );
+
+  const data = await res.json();
+  return data.results;
+}

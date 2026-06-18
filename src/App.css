@@ -7,16 +7,45 @@ body {
   overflow-x: hidden;
 }
 
+h2 {
+  margin: 30px 0 10px 10px;
+}
+
+.section-title span {
+  color: #ff8c42;
+  font-weight: 700;
+}
+
 .movie-list {
   display: flex;
   gap: 20px;
   overflow-x: auto;
-  padding: 20px;
+  padding: 20px 5px;
   width: 100%;
+
+  scrollbar-width: thin;
+  scrollbar-color: #bbb transparent;
+}
+
+.movie-list::-webkit-scrollbar {
+  height: 6px;
+}
+
+.movie-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.movie-list::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 999px;
+}
+
+.movie-list::-webkit-scrollbar-thumb:hover {
+  background: #888;
 }
 
 .movie-card {
-  min-width: 190px;
+  min-width: 200px;
 }
 
 .movie-card img {
@@ -26,26 +55,28 @@ body {
 }
 
 .movie-card h3 {
-  font-size: 16px;
-  margin: 10px 0 4px;
-
-  line-height: 1.4;
-
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 10px;
+  font-size: 15px;
   white-space: nowrap;
 }
 
-.movie-card h3 span {
-  margin-left: 6px;
+.movie-title {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 1.4;
+}
+
+.movie-age {
+  flex-shrink: 0;
   font-size: 11px;
   padding: 2px 5px;
   border: 1px solid #aaa;
   border-radius: 4px;
-  flex-shrink: 0;
 }
 
 .movie-info {
@@ -53,6 +84,24 @@ body {
   gap: 8px;
   font-size: 13px;
   color: #777;
+  height: 20px;
+}
+
+.movie-time {
+  position: relative;
+  padding-left: 16px;
+}
+
+.movie-time::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 12px;
+  height: 12px;
+  transform: translateY(20%);
+  background: url(../public/icon/icon_clock_black.svg) 0 0 no-repeat;
 }
 
 .movie-actions {
@@ -103,6 +152,7 @@ body {
   position: relative;
   overflow: hidden;
 }
+
 .hero::after {
   content: "";
   position: absolute;
@@ -125,9 +175,18 @@ body {
   z-index: 1;
 }
 
-.hero-text p {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+.hero-text button {
+  margin-top: 16px;
+  padding: 12px 26px;
+  border: none;
+  border-radius: 999px;
+  background: #fff;
+  color: #111;
+  font-weight: 600;
+  cursor: pointer;
 }
+
+.hero-text button:hover {
+  background: #eee;
+}
+
