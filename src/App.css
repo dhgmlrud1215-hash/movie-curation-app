@@ -318,6 +318,7 @@ div.section-title {
   scrollbar-width: none;
 }
 
+
 .cast-list::-webkit-scrollbar {
   display: none;
 }
@@ -343,7 +344,7 @@ div.section-title {
 .cast-card p {
   margin-top: 4px;
   font-size: 12px;
-  color: #777;
+  color: #111;
 }
 
 
