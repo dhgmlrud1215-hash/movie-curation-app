@@ -365,12 +365,16 @@ div.section-title {
   background: none;
   border: none;
 
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
 
   border: none;
   border-radius: 50%;
-  background: rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(10px);
+
+  font-size: 22px;
+  color: #333;
 
   font-size: 24px;
   cursor: pointer;
