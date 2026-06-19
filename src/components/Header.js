@@ -2,7 +2,7 @@ function Header() {
 
     return (
         <header className="header">
-            <h1 className="logo">MOVIHEE BOX</h1>
+            <h1 className="logo">MOVIE BOX</h1>
 
             <nav className="header-menu">
                 <a href="#">

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getMovieCertification, getMovieDetail } from "../api/movieApi";
+import { Link } from "react-router-dom";
 
 function MovieCard({ movie, type, likedMovies, onLike }) {
 
@@ -39,11 +40,13 @@ function MovieCard({ movie, type, likedMovies, onLike }) {
 
   return (
     <div className="movie-card">
-      <img
-        src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-        alt={movie.title}
-        className="movie-poster"
-      />
+      <Link to={`/movie/${movie.id}`}>
+        <img
+          src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+          alt={movie.title}
+          className="movie-poster"
+        />
+      </Link>
 
       <button className="like-btn" onClick={() => onLike(movie)}>
         <img
