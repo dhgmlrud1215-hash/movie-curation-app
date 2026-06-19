@@ -1,8 +1,12 @@
+import { Link } from "react-router-dom";
+
 function Header() {
 
     return (
         <header className="header">
-            <h1 className="logo">MOVIE BOX</h1>
+            <Link to="/">
+                <h1 className="logo">MOVIE BOX</h1>
+            </Link>
 
             <nav className="header-menu">
                 <a href="#">

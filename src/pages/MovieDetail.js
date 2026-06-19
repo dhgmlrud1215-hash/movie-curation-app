@@ -23,7 +23,12 @@ function MovieDetail() {
 
 
     return (
-        <main className="detail">
+        <main 
+            className="detail"
+            style={{
+                backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`, 
+            }}
+        >
             <section className="detail-main">
                 <img 
                     src={`https://image.tmdb.org/t/p/w400${movie.poster_path}`}

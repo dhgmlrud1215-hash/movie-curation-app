@@ -1,4 +1,10 @@
+import { useState } from "react";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+
 function ReserveModal({ movie, onClose }) {
+  const [date, setDate] = useState(new Date());
+
   return (
     <div className="modal-bg">
       <div className="reserve-modal">
@@ -7,8 +13,11 @@ function ReserveModal({ movie, onClose }) {
         <h3>{movie.title}</h3>
         <p>관람일과 시간을 선택해주세요.</p>
 
-        <label>관람일</label>
-        <input type="date" className="reserve-input" />
+        <Calendar 
+            onChange={setDate} 
+            value={date}
+            formatDay={(locale, date) => date.getDate()}
+             />
 
         <label>관람 시간</label>
         <select className="reserve-input">

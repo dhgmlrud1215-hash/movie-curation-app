@@ -3,6 +3,7 @@ import MovieCard from "../components/MovieCard";
 import { 
   getNowPlayingMovies, getUpcomingMovies, getTopRatedMovies 
   } from "../api/movieApi";
+import { Link } from "react-router-dom";
 
 function Home() {
   const [movies, setMovies] = useState([]);
@@ -59,7 +60,10 @@ function Home() {
             <div className="hero-text">
                 <h1>{movies[0].title}</h1>
                 <p>{movies[0].overview}</p>
-                <button>▶ 자세히 보기</button>
+                
+                <Link to={`/movie/${movies[0].id}`}>
+                  <button>▶ 자세히 보기</button>
+                </Link>
             </div>
         </section>
       )}
