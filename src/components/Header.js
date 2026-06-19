@@ -9,11 +9,17 @@ function Header() {
             </Link>
 
             <nav className="header-menu">
-                <a href="#">
-                    <img src="/icon/search.svg" alt="검색"/>
-                </a>
-                <a href="#">로그인</a>
-                <a href="#">마이페이지</a>
+                <Link to="/search">
+                    <img src="/icon/search.svg" alt="" />
+                </Link>
+
+                <Link to="/login">
+                    로그인
+                </Link>
+
+                <Link to="/mypage">
+                    마이페이지
+                </Link>
             </nav>
         </header>
     );
