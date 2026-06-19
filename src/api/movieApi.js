@@ -47,3 +47,12 @@ export async function getTopRatedMovies() {
   const data = await res.json();
   return data.results;
 }
+
+export async function getMovieCredits(movieId) {
+  const res = await fetch(
+    `${BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}&language=ko-KR`
+  );
+
+  const data = await res.json();
+  return data.cast;
+}

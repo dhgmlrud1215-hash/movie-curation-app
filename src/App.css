@@ -239,4 +239,109 @@ div.section-title {
   object-fit: contain;
 }
 
+.detail {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 120px 40px 80px;
+}
 
+.detail-main {
+  display: block;
+}
+
+.detail-poster {
+  width: 320px;
+  display: block;
+  margin-bottom: 30px;
+}
+
+.detail-text {
+  max-width: 800px;
+}
+
+.detail-info {
+  display: flex;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.cast-section {
+  margin-top: 60px;
+}
+
+.cast-section h3 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.cast-list {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.cast-list::-webkit-scrollbar {
+  display: none;
+}
+
+.cast-card {
+  flex: 0 0 120px;
+  text-align: center;
+}
+
+.cast-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.cast-card strong {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.cast-card p {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #777;
+}
+
+
+.modal-bg {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+.reserve-modal {
+  width: 360px;
+  padding: 30px;
+  background: #fff;
+  border-radius: 20px;
+}
+
+.close-btn {
+  float: right;
+}
+
+.reserve-modal select,
+.reserve-confirm {
+  width: 100%;
+  height: 42px;
+  margin-top: 12px;
+}
+
+.reserve-input {
+  width: 100%;
+  height: 42px;
+  margin: 8px 0 14px;
+  padding: 0 12px;
+  border: 1px solid #ddd;
+}
