@@ -23,63 +23,65 @@ function MovieDetail() {
 
 
     return (
-        <main 
-            className="detail"
-            style={{
-                backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`, 
-            }}
-        >
-            <section className="detail-main">
-                <img 
-                    src={`https://image.tmdb.org/t/p/w400${movie.poster_path}`}
-                    alt={movie.title}
-                    className="detail-poster"
-                />
+  <main
+    className="detail"
+    style={{
+      backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
+    }}
+  >
+    <section className="detail-main">
+      <img
+        src={`https://image.tmdb.org/t/p/w400${movie.poster_path}`}
+        alt={movie.title}
+        className="detail-poster"
+      />
 
-                <div className="detail-text">
-                    <h2>{movie.title}</h2>
-                    <p>{movie.overview}</p>
+      <div className="detail-content-box">
+        <div className="detail-text">
+          <h2>{movie.title}</h2>
+          <p>{movie.overview}</p>
+        </div>
+
+        <div className="detail-info">
+          <span>⭐ {movie.vote_average.toFixed(1)}</span>
+          <span>{movie.runtime}분</span>
+          <span>{movie.release_date}</span>
+        </div>
+
+        <button className="reserve-btn" onClick={() => setIsReserveOpen(true)}>
+          예매하기
+        </button>
+
+        <section className="cast-section">
+          <h3>출연진</h3>
+
+          <div className="cast-list">
+            {cast
+              .filter((person) => person.profile_path)
+              .slice(0, 8)
+              .map((person) => (
+                <div className="cast-card" key={person.id}>
+                  <img
+                    src={`https://image.tmdb.org/t/p/w200${person.profile_path}`}
+                    alt={person.name}
+                  />
+                  <strong>{person.name}</strong>
+                  <p>{person.character}</p>
                 </div>
-
-                <div className="detail-info">
-                    <span>⭐ {movie.vote_average.toFixed(1)}</span>
-                    <span>{movie.runtime}분</span>
-                    <span>{movie.release_date}</span>
-                </div>
-
-                <button className="reserve-btn" onClick={() => setIsReserveOpen(true)}>
-                    예매하기
-                </button>
-            </section>
-
-            {isReserveOpen && (
-                <ReserveModal
-                    movie={movie}
-                    onClose={() => setIsReserveOpen(false)}
-                />
-            )}
-
-            <section className="cast-section">
-                <h3>출연진</h3>
-
-                <div className="cast-list">
-                    {cast
-                    .filter((person) => person.profile_path)
-                    .slice(0, 8)
-                    .map((person) => (
-                    <div className="cast-card" key={person.id}>
-                    <img
-                        src={`https://image.tmdb.org/t/p/w200${person.profile_path}`}
-                        alt={person.name}
-                    />
-                    <strong>{person.name}</strong>
-                    <p>{person.character}</p>
-                    </div>
-                ))}
-                </div>
+              ))}
+          </div>
         </section>
-        </main>
-    );
+      </div>
+    </section>
+
+    {isReserveOpen && (
+      <ReserveModal
+        movie={movie}
+        onClose={() => setIsReserveOpen(false)}
+      />
+    )}
+  </main>
+);
 }
 
 export default MovieDetail;

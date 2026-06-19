@@ -256,14 +256,22 @@ div.section-title {
   margin-bottom: 30px;
 }
 
+.detail-content-box {
+  padding: 28px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(12px);
+}
+
 .detail-text {
   max-width: 800px;
-  padding: 24px;
-  margin-top: 24px;
-  border-radius: 18px;
+  padding: 0;
+  background: none;
+}
 
-  background: rgba(255, 255, 255, 0.78);
-  backdrop-filter: blur(10px);
+.cast-section {
+  background: none;
+  padding: 0;
 }
 
 .detail-text p {
