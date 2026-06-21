@@ -5,6 +5,17 @@ import "react-calendar/dist/Calendar.css";
 function ReserveModal({ movie, onClose }) {
   const [date, setDate] = useState(new Date());
 
+  const newReserve = {
+      movieTitle: movie.title,
+      date: selectedDate,
+      people: people,
+    };
+
+    const preReserve = JSON.parse(localStorage.getItem("reservations")) || [];
+    localStorage.setItem("reservations", JSON.stringify([...preReserve,newReserve]));
+
+    alert("예매가 완료되었습니다.")
+
   return (
     <div className="modal-bg">
       <div className="reserve-modal">
@@ -29,7 +40,7 @@ function ReserveModal({ movie, onClose }) {
           <option>21:00</option>
         </select>
 
-        <button className="reserve-confirm">예매 확인</button>
+        <button className="reserve-confirm">예매 하기</button>
       </div>
     </div>
   );
