@@ -20,8 +20,15 @@ function Home() {
   if (isLiked) {
     updatedMovies = likedMovies.filter((item) => item.id !== movie.id);
   } else {
-    updatedMovies = [...likedMovies, movie];
-  }
+    const newLike = {
+      id: movie.id,
+      title: movie.title,
+      poster_path: movie.poster_path,
+  };
+
+  updatedMovies = [...likedMovies, newLike];
+
+}
 
   setLikedMovies(updatedMovies);
   localStorage.setItem("likedMovies", JSON.stringify(updatedMovies));

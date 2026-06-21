@@ -6,31 +6,38 @@ import "../css/Login.css";
 
 function Mypage() {
   const [user, setUser] = useState(null);
-  const navigate = useNavigate();
   const [reservations, setReservations] = useState([]);
+  const navigate = useNavigate();
+  const [likes, setLikes] = useState([]);
 
   useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        setUser(currentUser);
-      } else {
-        alert("로그인이 필요합니다.");
-        navigate("/login");
-      }
+  const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    if (currentUser) {
+      setUser(currentUser);
+
+      const savedReserve =
+        JSON.parse(localStorage.getItem("reservations")) || [];
+      setReservations(savedReserve);
+
+      const savedLikes =
+        JSON.parse(localStorage.getItem("likedMovies")) || [];
+      setLikes(savedLikes);
+    } else {
+      navigate("/login");
+    }
     });
-  }, [navigate]);
 
-  const handleLogout = async () => {
-    await signOut(auth);
-    alert("로그아웃 되었습니다.");
-    navigate("/");
+    return () => unsubscribe();
+    }, [navigate]);
+  
+    const handleLogout = async () => {
+        await signOut(auth);
+        alert("로그아웃 되었습니다.");
+        navigate("/");
+    };
 
-  const savedReserve = JSON.parse(localStorage.getItem("reservations")) || [];
-    setReservations(savedReserve);
-  };
-
-  const handleDelete = async () => {
-    if (!window.confirm("정말 탈퇴하시겠습니까?")) return;
+    const handleDelete = async () => {
+        if (!window.confirm("정말 탈퇴하시겠습니까?")) return;
 
     try {
       await deleteUser(auth.currentUser);
@@ -41,42 +48,60 @@ function Mypage() {
     }
   };
 
+
+
   return (
     <div className="mypage-wrap">
-        <h2>마이페이지</h2>
+      <h2>마이페이지</h2>
 
-        <div className="user-box">
-            <p>닉네임: {user?.displayName || "닉네임 없음"}</p>
-            <p>이메일: {user?.email}</p>
-        </div>
+      <div className="user-box">
+        <p>닉네임: {user?.displayName || "닉네임 없음"}</p>
+        <p>이메일: {user?.email}</p>
+      </div>
 
-        <div className="mypage-menu">
-            <button onClick={() => navigate("/edit-profile")}>정보 수정</button>
-            <button onClick={handleLogout}>로그아웃</button>
-            <button className="danger" onClick={handleDelete}>회원 탈퇴</button>
-        </div>
+      <section className="mypage-section">
+        <h3>예매 내역</h3>
 
-        <section className="mypage-section">
-            <h3>예매 내역</h3>
-            <p className="empty-text">아직 예매한 영화가 없습니다.</p>
+        {reservations.length === 0 ? (
+          <p className="empty-text">아직 예매한 영화가 없습니다.</p>
+        ) : (
+          reservations.map((item, index) => (
+            <div className="reserve-item" key={index}>
+              <p>{item.movieTitle}</p>
+              <span>{item.date}</span>
+              <span>{item.time}</span>
+              <span>{item.people}명</span>
+            </div>
+          ))
+        )}
+      </section>
 
-            {reservations.length === 0 ? (
-                <p className="empty-text">아직 예매한 영화가 없습니다.</p>
-            ) : (
-                reservations.map((item.index) => (
-                    <div className="reserve-item" key={index}>
-                        <p>{item.movetitle}</p>
-                        <sapn>{item.date}</sapn>
-                        <span>{item.people}</span>
-                    </div>
-                ))
+      <section className="mypage-section">
+        <h3>찜한 영화</h3>
+
+        
+        <div className="like-list">
+        {likes.map((item) => (
+            <div className="like-item" key={item.id}>
+            {item.poster_path && (
+                <img
+                src={`https://image.tmdb.org/t/p/w200${item.poster_path}`}
+                alt={item.title}
+                />
             )}
+            <p>{item.title}</p>
+            </div>
+        ))}
+</div>
         </section>
 
-        <section className="mypage-section">
-            <h3>찜한 영화</h3>
-            <p className="empty-text">아직 찜한 영화가 없습니다.</p>
-        </section>
+      <div className="mypage-menu">
+        <button onClick={() => navigate("/edit-profile")}>정보 수정</button>
+        <button onClick={handleLogout}>로그아웃</button>
+        <button className="danger" onClick={handleDelete}>
+          회원 탈퇴
+        </button>
+      </div>
     </div>
   );
 }

@@ -4,17 +4,26 @@ import "react-calendar/dist/Calendar.css";
 
 function ReserveModal({ movie, onClose }) {
   const [date, setDate] = useState(new Date());
+  const [time, setTime] = useState("10:00");
+  const [people, setPeople] = useState(1);
 
-  const newReserve = {
+  const handleReserve = () => {
+    const newReserve = {
       movieTitle: movie.title,
-      date: selectedDate,
+      date: date.toLocaleDateString(),
+      time: time,
       people: people,
     };
 
-    const preReserve = JSON.parse(localStorage.getItem("reservations")) || [];
-    localStorage.setItem("reservations", JSON.stringify([...preReserve,newReserve]));
+    const prevReserve = JSON.parse(localStorage.getItem("reservations")) || [];
+    localStorage.setItem(
+      "reservations",
+      JSON.stringify([...prevReserve, newReserve])
+    );
 
-    alert("예매가 완료되었습니다.")
+    alert("예매가 완료되었습니다.");
+    onClose();
+  };
 
   return (
     <div className="modal-bg">
@@ -24,14 +33,18 @@ function ReserveModal({ movie, onClose }) {
         <h3>{movie.title}</h3>
         <p>관람일과 시간을 선택해주세요.</p>
 
-        <Calendar 
-            onChange={setDate} 
-            value={date}
-            formatDay={(locale, date) => date.getDate()}
-             />
+        <Calendar
+          onChange={setDate}
+          value={date}
+          formatDay={(locale, date) => date.getDate()}
+        />
 
         <label>관람 시간</label>
-        <select className="reserve-input">
+        <select
+          className="reserve-input"
+          value={time}
+          onChange={(e) => setTime(e.target.value)}
+        >
           <option>10:00</option>
           <option>12:00</option>
           <option>14:00</option>
@@ -40,7 +53,23 @@ function ReserveModal({ movie, onClose }) {
           <option>21:00</option>
         </select>
 
-        <button className="reserve-confirm">예매 하기</button>
+        <label>인원</label>
+        <select
+          className="reserve-input"
+          value={people}
+          onChange={(e) => setPeople(e.target.value)}
+        >
+          <option value="1">1명</option>
+          <option value="2">2명</option>
+          <option value="3">3명</option>
+          <option value="4">4명</option>
+          <option value="5">5명</option>
+          <option value="6">6명</option>
+        </select>
+
+        <button className="reserve-confirm" onClick={handleReserve}>
+          예매 하기
+        </button>
       </div>
     </div>
   );

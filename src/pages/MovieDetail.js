@@ -9,6 +9,26 @@ function MovieDetail() {
     const [cast, setCast] = useState([]);
     const [isReserveOpen, setIsReserveOpen] = useState(false);
 
+    const handleLike = () => {
+    const newLike = {
+      id: movie.id,
+      title: movie.title,
+      poster: movie.poster_path,
+    };
+
+  const prevLikes = JSON.parse(localStorage.getItem("likes")) || [];
+
+  const alreadyLiked = prevLikes.some((item) => item.id === movie.id);
+
+  if (alreadyLiked) {
+    alert("이미 찜한 영화입니다.");
+    return;
+  }
+
+  localStorage.setItem("likes", JSON.stringify([...prevLikes, newLike]));
+  alert("찜한 영화에 추가되었습니다.");
+};
+
     useEffect(() => {
         getMovieDetail(id).then((data) => {
             setMovies(data);
