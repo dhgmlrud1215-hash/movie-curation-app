@@ -7,6 +7,7 @@ import Join from "./pages/Join";
 import Search from './pages/Search';
 import Mypage from "./pages/Mypage";
 import MovieDetail from './pages/MovieDetail';
+import EditProfile from "./pages/EditProfile";
 import Footer from "./components/Footer";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/join" element={<Join />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/movie/:id" element={<MovieDetail />} />
       </Routes>
 
