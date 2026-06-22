@@ -9,6 +9,7 @@ function Mypage() {
   const [reservations, setReservations] = useState([]);
   const navigate = useNavigate();
   const [likes, setLikes] = useState([]);
+  const [selectedReserve, setSelectedReserve] = useState(null);
 
   useEffect(() => {
   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -48,6 +49,16 @@ function Mypage() {
     }
   };
 
+  const handleCancel = (id) => {
+    const confirmCancle = window.confirm("예매를 취소하시겠습니까?");
+
+    if(!confirmCancle) return;
+
+    setReservations(
+      reservations.filter(item => item.id !== id)
+    );
+   };
+
 
 
   return (
@@ -66,11 +77,23 @@ function Mypage() {
           <p className="empty-text">아직 예매한 영화가 없습니다.</p>
         ) : (
           reservations.map((item, index) => (
-            <div className="reserve-item" key={index}>
-              <p>{item.movieTitle}</p>
-              <span>{item.date}</span>
-              <span>{item.time}</span>
-              <span>{item.people}명</span>
+            <div className="reserve-item" key={item.id || index}>
+              <div className="reserve-info">
+                <p>{item.movieTitle}</p>
+                <span>{item.date}</span>
+                <span>{item.time}</span>
+                <span>{item.people}명</span>
+              </div>
+
+              <div className="reserve-btns">
+                <button onClick={() => setSelectedReserve(item)}>
+                  상세확인
+                </button>
+
+                <button onClick={() => handleCancel(item.id)}>
+                  예매취소
+                </button>
+              </div>
             </div>
           ))
         )}
@@ -91,8 +114,8 @@ function Mypage() {
             )}
             <p>{item.title}</p>
             </div>
-        ))}
-</div>
+          ))}
+          </div>
         </section>
 
       <div className="mypage-menu">
@@ -102,6 +125,22 @@ function Mypage() {
           회원 탈퇴
         </button>
       </div>
+
+      {selectedReserve && (
+        <div className="modal-bg">
+          <div className="reserve-modal">
+            <h3>예매 상세</h3>
+            <p>영화: {selectedReserve.movieTitle}</p>
+            <p>날짜: {selectedReserve.date}</p>
+            <p>시간: {selectedReserve.time}</p>
+            <p>인원: {selectedReserve.people}명</p>
+
+            <button onClick={() => setSelectedReserve(null)}>
+              닫기
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
