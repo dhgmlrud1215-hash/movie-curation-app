@@ -13,6 +13,11 @@ import Footer from "./components/Footer";
 function App() {
   return (
     <BrowserRouter>
+    <>
+      <a href="#main-content" className="skip-link">
+        메인 콘텐츠 바로가기
+      </a>
+      
       <Header/>
 
       <Routes>
@@ -24,6 +29,8 @@ function App() {
         <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/movie/:id" element={<MovieDetail />} />
       </Routes>
+
+    </>
 
       <Footer/>  
     </BrowserRouter>

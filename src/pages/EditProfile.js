@@ -40,6 +40,7 @@ function EditProfile() {
         }
     };
 
+
     return(
         <div className="login-wrap">
             <h2>정보 수정</h2>

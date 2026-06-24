@@ -56,7 +56,7 @@ function Home() {
 
 
    return (
-    <main>
+    <main id="main-content">
       {movies[0] && (
         <section className="hero">
             <img
@@ -82,7 +82,7 @@ function Home() {
 
       <section className="movie-list">
         {movies.map((movie) => (
-            <MovieCard k
+            <MovieCard 
             key={movie.id}
             movie={movie}
             likedMovies={likedMovies}
