@@ -1,3 +1,16 @@
+:root {
+  --accent: #ff8c42;
+  --danger: #ff4d4f;
+
+  --section-gap: 80px;
+  --title-gap: 16px;
+  --list-gap: 14px;
+
+  --card-w: 150px;
+  --poster-h: 220px;
+  --title-size: 28px;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -13,30 +26,28 @@ a {
 }
 
 h2 {
-  margin: 30px 0 10px 10px;
+  margin: 0;
 }
 
+/* header */
 .header {
   position: fixed;
-  width: 100%;
-
   top: 0;
   z-index: 9999;
+  width: 100%;
   height: 56px;
   padding: 0 20px;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
 }
 
 .logo {
+  margin: 0;
   font-size: 22px;
   font-weight: 800;
-  margin: 0;
 }
 
 .header-menu {
@@ -56,9 +67,10 @@ h2 {
   display: block;
 }
 
+/* hero */
 .hero {
   width: auto;
-  height:500px;
+  height: 500px;
   position: relative;
   overflow: hidden;
 }
@@ -67,7 +79,7 @@ h2 {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.35);
+  background: rgba(0, 0, 0, 0.35);
 }
 
 .hero img {
@@ -80,9 +92,9 @@ h2 {
   position: absolute;
   left: 20px;
   bottom: 24px;
-  max-width: 320px;
-  color: white;
   z-index: 1;
+  max-width: 320px;
+  color: #fff;
   font-size: 13px;
 }
 
@@ -101,11 +113,37 @@ h2 {
   background: #eee;
 }
 
+/* section titles */
+.section-title,
+.liked-title {
+  margin: var(--section-gap) 10px var(--title-gap);
+}
 
-div.section-title {
+.section-title {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.section-title h2,
+.genre-section h2,
+.today-info h2 {
+  margin: 0;
+  font-size: var(--title-size);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.liked-title {
+  margin: var(--section-gap) 10px var(--title-gap);
+  font-size: var(--title-size);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.liked-title span {
+  color: var(--accent);
+  font-weight: 700;
 }
 
 .section-title small {
@@ -115,25 +153,29 @@ div.section-title {
   font-weight: 400;
 }
 
-.section-title span {
-  color: #ff8c42;
+.section-title span,
+.genre-section h2 span,
+.liked-title span,
+.comingday {
+  color: var(--accent);
   font-weight: 700;
 }
 
+/* movie list */
 .movie-list {
   display: flex;
-  gap: 14px;
+  gap: var(--list-gap);
   overflow-x: auto;
   overflow-y: hidden;
   padding: 16px 10px 24px;
-
+  margin-bottom: var(--section-gap);
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-
   cursor: grab;
 }
 
-.movie-list::-webkit-scrollbar {
+.movie-list::-webkit-scrollbar,
+.cast-list::-webkit-scrollbar {
   display: none;
 }
 
@@ -142,23 +184,18 @@ div.section-title {
 }
 
 .movie-card {
-  width: 150px;
-  flex: 0 0 150px;
+  width: var(--card-w);
+  flex: 0 0 var(--card-w);
   position: relative;
 }
 
-.movie-poster {
+.movie-poster,
+.movie-card img,
+.like-list img {
   width: 100%;
-  height: 220px;
+  height: var(--poster-h);
+  display: block;
   object-fit: cover;
-  display: block;
-}
-
-
-.movie-card img {
-  width: 100%;
-  height: 220px;
-  display: block;
 }
 
 .movie-card h3 {
@@ -190,13 +227,9 @@ div.section-title {
 .movie-info {
   display: flex;
   gap: 8px;
+  height: 20px;
   font-size: 12px;
   color: #777;
-  height: 20px;
-}
-
-.comingday {
-  color: #ff8c42;
 }
 
 .movie-time {
@@ -205,7 +238,7 @@ div.section-title {
 }
 
 .movie-time::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -217,17 +250,15 @@ div.section-title {
 }
 
 .like-btn {
-   position: absolute;
+  position: absolute;
   top: 10px;
   right: 10px;
-
   width: 32px;
   height: 32px;
   padding: 0;
   border: none;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.6);
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -240,6 +271,68 @@ div.section-title {
   object-fit: contain;
 }
 
+/* today */
+.today-section {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin: var(--section-gap) 10px;
+  padding: 32px;
+  border-radius: 20px;
+  background: #f7f7f7;
+}
+
+.today-info {
+  flex: 1;
+}
+
+.today-info h2 {
+  margin-bottom: 12px;
+}
+
+.today-reason {
+  color: #ff6b2c;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.today-overview {
+  max-width: 620px;
+  line-height: 1.7;
+  color: #555;
+}
+
+/* genre */
+.genre-section {
+  margin: var(--section-gap) 0 0;
+}
+
+.genre-button {
+  display: flex;
+  gap: 10px;
+  margin: var(--title-gap) 10px 24px;
+  flex-wrap: wrap;
+}
+
+.genre-button button {
+  padding: 10px 18px;
+  border: 1px solid #ff6b2c;
+  border-radius: 999px;
+  background-color: #fff;
+  color: #ff6b2c;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.genre-button button:hover,
+.genre-button button.active {
+  background-color: #ff6b2c;
+  color: #fff;
+  border-color: #ff6b2c;
+}
+
+/* detail */
 .detail {
   max-width: 1000px;
   margin: 0 auto;
@@ -269,11 +362,6 @@ div.section-title {
   background: none;
 }
 
-.cast-section {
-  background: none;
-  padding: 0;
-}
-
 .detail-text p {
   line-height: 1.7;
   color: #333;
@@ -286,41 +374,11 @@ div.section-title {
   flex-wrap: wrap;
 }
 
-.reserve-item {
-  padding: 12px 0;
-  border-bottom: 1px solid #444;
-}
-
-.reserve-item p {
-  margin-bottom: 6px;
-  font-weight: 600;
-}
-
-.reserve-item span {
-  display: inline-block;
-  margin-right: 10px;
-  color: #bbb;
-  font-size: 14px;
-}
-
-.reserve-btn {
-  margin-top: 20px;
-  padding: 12px 28px;
-  border: none;
-  border-radius: 999px;
-  background: #ff4d4f;
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.reserve-btn:hover {
-  background: #e63b3d;
-}
-
+/* cast */
 .cast-section {
-  margin-top: 60px;
+  margin-top: var(--section-gap);
+  padding: 0;
+  background: none;
 }
 
 .cast-section h3 {
@@ -333,11 +391,6 @@ div.section-title {
   gap: 16px;
   overflow-x: auto;
   scrollbar-width: none;
-}
-
-
-.cast-list::-webkit-scrollbar {
-  display: none;
 }
 
 .cast-card {
@@ -364,15 +417,95 @@ div.section-title {
   color: #111;
 }
 
+/* reserve */
+.reserve-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #444;
+}
 
+.reserve-item p {
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.reserve-item span {
+  display: inline-block;
+  margin-right: 10px;
+  color: #bbb;
+  font-size: 14px;
+}
+
+.reserve-btn,
+.reserve-confirm {
+  border: none;
+  background: var(--danger);
+  color: #fff;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.reserve-btn {
+  margin-top: 20px;
+  padding: 12px 28px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.reserve-confirm {
+  width: 100%;
+  height: 42px;
+  margin-top: 12px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.reserve-btn:hover,
+.reserve-confirm:hover {
+  background: #e63b3d;
+}
+
+.reserve-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.reserve-btns button {
+  padding: 7px 12px;
+  border: 1px solid #444;
+  border-radius: 6px;
+  background: transparent;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.reserve-btns button:hover {
+  background: #fff;
+  color: #111;
+}
+
+.reserve-btns button:last-child {
+  border-color: #d9534f;
+  color: #d9534f;
+}
+
+.reserve-btns button:last-child:hover {
+  background: #d9534f;
+  color: #fff;
+}
+
+/* modal */
 .modal-bg {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.45);
+  z-index: 99999;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 99999;
+  background: rgba(0, 0, 0, 0.45);
 }
 
 .modal-bg label {
@@ -380,52 +513,52 @@ div.section-title {
 }
 
 .reserve-modal {
-  width: calc(100% - 40px);
+  width: 320px;
+  max-width: calc(100% - 40px);
   padding: 24px;
+  border-radius: 16px;
   background: #fff;
-  border-radius: 20px;
+  color: #111;
+}
+
+.reserve-modal h3,
+.reserve-modal p {
+  color: #111;
+}
+
+.reserve-modal button {
+  width: 100%;
+  height: 42px;
+  margin-top: 18px;
+  border: none;
+  border-radius: 8px;
+  background: #111;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.reserve-modal button:hover {
+  background: #333;
 }
 
 .close-btn {
   float: right;
-  background: none;
-  border: none;
-
   width: 36px;
   height: 36px;
-
   border: none;
   border-radius: 50%;
-  background: rgba(255,255,255,0.8);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
-
-  font-size: 22px;
-  color: #333;
-
   font-size: 24px;
+  color: #333;
   cursor: pointer;
   transition: 0.2s;
 }
 
 .close-btn:hover {
-  background: rgba(0,0,0,0.15);
-}
-
-.reserve-confirm {
-  width: 100%;
-  height: 42px;
-  margin-top: 12px;
-  border: none;
-  border-radius: 10px;
-  background: #ff4d4f;
-  color: #fff;
-  font-weight: 500;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.reserve-confirm:hover {
-  background: #e63b3d;
+  background: rgba(0, 0, 0, 0.15);
 }
 
 .reserve-input {
@@ -436,6 +569,7 @@ div.section-title {
   border: 1px solid #ddd;
 }
 
+/* calendar */
 .react-calendar {
   width: 100%;
   border: none;
@@ -453,7 +587,7 @@ div.section-title {
 }
 
 .react-calendar__tile--active {
-  background: #ff4d4f;
+  background: var(--danger);
   color: #fff;
 }
 
@@ -461,23 +595,7 @@ div.section-title {
   background: #f5f5f5;
 }
 
-.footer {
-  padding: 40px 20px;
-  text-align: center;
-  background: #111;
-  color: #aaa;
-  font-size: 13px;
-}
-
-.footer p {
-  margin: 4px 0;
-}
-
-.footer small {
-  display: block;
-  margin-top: 12px;
-  color: #777;
-}
+/* mypage */
 .mypage-wrap {
   width: 80%;
   margin: 100px auto;
@@ -499,10 +617,6 @@ div.section-title {
   gap: 20px;
 }
 
-.like-list img {
-  height: 300px;
-}
-
 .like-list p {
   text-align: center;
 }
@@ -515,19 +629,16 @@ div.section-title {
 }
 
 .mypage-menu button {
+  flex: 1;
+  width: 100px;
+  height: 47px;
   margin-bottom: 10px;
-
   border: none;
   border-radius: 10px;
   background: #2b2b2b;
-
   color: #fff;
   font-size: 15px;
   cursor: pointer;
-
-  flex: 1;
-  height: 47px;
-  width: 100px;
 }
 
 .mypage-menu .danger {
@@ -535,7 +646,6 @@ div.section-title {
 }
 
 .mypage-section {
-  
   margin-top: 24px;
   padding: 18px;
   background: #252525;
@@ -552,8 +662,52 @@ div.section-title {
   font-size: 14px;
 }
 
+/* footer */
+.footer {
+  padding: 40px 20px;
+  text-align: center;
+  background: #111;
+  color: #aaa;
+  font-size: 13px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer small {
+  display: block;
+  margin-top: 12px;
+  color: #777;
+}
+
+@media (max-width: 767px) {
+  .hero-text h1 {
+    font-size: 24px;
+    line-height: 1.3;
+  }
+
+  .hero-text p,
+  .today-reason,
+  .today-overview {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .today-info h2,
+  .section-title h2,
+  .genre-section h2 {
+    font-size: 22px;
+  }
+}
 
 @media (min-width: 768px) {
+  :root {
+    --list-gap: 18px;
+    --card-w: 180px;
+    --poster-h: 250px;
+  }
+
   .header {
     height: 60px;
     padding: 0 28px;
@@ -563,16 +717,12 @@ div.section-title {
     font-size: 25px;
   }
 
-  .header-menu {
-    display: flex;
-  }
-
   .header-menu a {
     font-size: 16px;
   }
 
-  .hero{
-    height:600px;
+  .hero {
+    height: 600px;
   }
 
   .hero-text {
@@ -583,22 +733,8 @@ div.section-title {
   }
 
   .movie-list {
-    gap: 18px;
-    padding: 18px 10px 26px;
-  }
-
-  .movie-card {
-    width: 180px;
-    flex: 0 0 180px;
-  }
-
-  .movie-poster {
-    height: 250px;
-  }
-
-
-  .movie-card img {
-    height: 250px;
+    padding-top: 18px;
+    padding-bottom: 26px;
   }
 
   .movie-card h3 {
@@ -609,20 +745,37 @@ div.section-title {
     font-size: 13px;
   }
 
-  .detail {
-  width: 100%;
-  max-width: none;
-  min-height: 100vh;
-  padding: 110px 32px 70px;
-
-  background-size: cover;
-  background-position: center;
+  .today-section {
+    gap: 24px;
+    padding: 30px;
+    overflow: hidden;
   }
-  
+
+  .today-info {
+    min-width: 0;
+  }
+
+  .today-overview {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .detail {
+    width: 100%;
+    max-width: none;
+    min-height: 100vh;
+    padding: 110px 32px 70px;
+    background-size: cover;
+    background-position: center;
+  }
+
   .detail-main,
   .cast-section {
-  max-width: 1000px;
-  margin: 0 auto;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .detail-poster {
@@ -648,8 +801,13 @@ div.section-title {
   }
 }
 
-
 @media (min-width: 1024px) {
+  :root {
+    --list-gap: 20px;
+    --card-w: 210px;
+    --poster-h: 270px;
+  }
+
   .header {
     height: 64px;
     padding: 0 40px;
@@ -659,8 +817,8 @@ div.section-title {
     font-size: 28px;
   }
 
-  .hero{
-    height:100%;
+  .hero {
+    height: 100%;
   }
 
   .hero-text {
@@ -675,22 +833,8 @@ div.section-title {
   }
 
   .movie-list {
-    gap: 20px;
-    padding: 20px 10px 28px;
-  }
-
-  .movie-card {
-    width: 200px;
-    flex: 0 0 210px;
-  }
-
-  .movie-poster {
-    height: 270px;
-  }
-
-
-  .movie-card img {
-    height: 270px;
+    padding-top: 20px;
+    padding-bottom: 28px;
   }
 
   .like-btn {
@@ -724,68 +868,13 @@ div.section-title {
   }
 }
 
-.reserve-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+@media (min-width: 1200px) {
+  .today-section {
+    justify-content: center;
+    gap: 80px;
+  }
 
-.reserve-btns {
-  display: flex;
-  gap: 8px;
-}
-
-.reserve-btns button {
-  padding: 7px 12px;
-  border: 1px solid #444;
-  border-radius: 6px;
-  background: transparent;
-  color: #fff;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-.reserve-btns button:hover {
-  background: #fff;
-  color: #111;
-}
-
-.reserve-btns button:last-child {
-  border-color: #d9534f;
-  color: #d9534f;
-}
-
-.reserve-btns button:last-child:hover {
-  background: #d9534f;
-  color: #fff;
-}
-
-.reserve-modal {
-  width: 320px;
-  background: #fff;
-  color: #111;
-  padding: 24px;
-  border-radius: 16px;
-}
-
-.reserve-modal h3,
-.reserve-modal p {
-  color: #111;
-}
-
-.reserve-modal button {
-  width: 100%;
-  height: 42px;
-  margin-top: 18px;
-  border: none;
-  border-radius: 8px;
-  background: #111;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.reserve-modal button:hover {
-  background: #333;
+  .today-info {
+    flex: 0 0 650px;
+  }
 }
