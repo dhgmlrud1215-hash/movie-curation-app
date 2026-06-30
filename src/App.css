@@ -699,6 +699,13 @@ h2 {
   .genre-section h2 {
     font-size: 22px;
   }
+
+  .today-overview {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }
 
 @media (min-width: 768px) {
@@ -835,6 +842,11 @@ h2 {
   .movie-list {
     padding-top: 20px;
     padding-bottom: 28px;
+  }
+
+  .today-overview {
+    display: block;
+    overflow: visible;
   }
 
   .like-btn {
