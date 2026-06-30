@@ -12,6 +12,21 @@ function Home() {
 
   const [likedMovies, setLikedMovies] = useState([]);
 
+  const [selectedGenre, setSelectedGenre] = useState(null);
+  const [genreMovies, setGenreMovies] = use([]);
+
+  const genres = [
+    {id: 28, name: "액션"},
+    {id: 35, name: "코미디"},
+    {id: 10749, name: "로맨스"},
+    {id: 27, name: "공포"},
+    {id: 16, name: "애니메이션"},
+  ];
+
+  const [todayMovie, setTodayMovie] = useState(null);
+  const randomMovie = data.results[Math.floor(Math.random() * data.results.length)];
+  setTodayMovie(randomMovie);
+
   const handleLikeMovie = (movie) => {
   const isLiked = likedMovies.some((item) => item.id === movie.id);
 
@@ -55,6 +70,9 @@ function Home() {
   }, []);
 
 
+
+
+
    return (
     <main id="main-content">
       {movies[0] && (
@@ -75,6 +93,14 @@ function Home() {
         </section>
       )}
 
+      {todayMovie && (
+        <section className="today-section">
+          <h2>오늘 이 영화 어때요?</h2>
+
+          <MovieCard movie={todayMovie} />
+        </section>
+      )}
+
       <div className="section-title">
         <h2><span>현재 </span>상영작</h2>
         <small>more &gt;&gt;</small>
@@ -89,6 +115,27 @@ function Home() {
             onLike={handleLikeMovie}
             type="now" />
         ))}
+      </section>
+
+      <section className="genre-section">
+        <h2>장르별 영화</h2>
+
+        <div className="genre-button">
+          {genres.map((genre) => (
+            <button
+              key={genre.id}
+              onClick={() => selectedGenre(genre.id)}
+            >
+              {genre.name}
+            </button>
+          ))}
+
+          <div className="movie-list">
+            {genreMovies.map((movie) => (
+              <MovieCard key={movie.id} movie={movie}/>
+            ))}
+          </div>
+        </div>
       </section>
 
       <div className="section-title">
